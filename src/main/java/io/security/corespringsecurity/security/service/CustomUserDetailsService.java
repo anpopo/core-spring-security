@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+/**
+ * 인증을 위한 db 연동
+ */
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
