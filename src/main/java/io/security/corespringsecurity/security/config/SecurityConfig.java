@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
@@ -25,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthenticationProvider authenticationProvider;
     private final AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> authenticationDetailsSource;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final AuthenticationFailureHandler authenticationFailureHandler;
 
     /**
      * 데이터 베이스와 연동하여 인증 및 권한 설정을 하기 위해 CustomAuthenticationProvider 객체를 설정해 줌.
@@ -38,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/users").permitAll()
+                .antMatchers("/", "/users", "user/login/**", "/login*").permitAll()
                 .antMatchers("/mypage").hasRole("USER")
                 .antMatchers("/messages").hasRole("MANAGER")
                 .antMatchers("/config").hasRole("ADMIN")
@@ -51,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .authenticationDetailsSource(authenticationDetailsSource)
                 .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
                 .permitAll();
     }
 
