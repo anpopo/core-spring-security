@@ -1,5 +1,7 @@
 package io.security.corespringsecurity.security.config;
 
+import io.security.corespringsecurity.security.common.AjaxAccessDeniedHandler;
+import io.security.corespringsecurity.security.common.AjaxLoginAuthenticationEntryPoint;
 import io.security.corespringsecurity.security.filter.AjaxLoginProcessingFilter;
 import io.security.corespringsecurity.security.provider.AjaxAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +52,7 @@ public class AjaxSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/api/**")
                 .authorizeRequests()
+                .antMatchers("/api/messages").hasRole("MANAGER")
                 .anyRequest().authenticated()
 
                 .and()
@@ -58,5 +61,10 @@ public class AjaxSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(new AjaxLoginAuthenticationEntryPoint())
+                .accessDeniedHandler(new AjaxAccessDeniedHandler())
+        ;
     }
 }
