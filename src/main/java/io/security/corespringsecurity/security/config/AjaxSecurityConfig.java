@@ -2,10 +2,7 @@ package io.security.corespringsecurity.security.config;
 
 import io.security.corespringsecurity.security.common.AjaxAccessDeniedHandler;
 import io.security.corespringsecurity.security.common.AjaxLoginAuthenticationEntryPoint;
-import io.security.corespringsecurity.security.filter.AjaxLoginProcessingFilter;
-import io.security.corespringsecurity.security.provider.AjaxAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -53,6 +49,7 @@ public class AjaxSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatcher("/api/**")
                 .authorizeRequests()
                 .antMatchers("/api/messages").hasRole("MANAGER")
+                .antMatchers("/api/login").permitAll()
                 .anyRequest().authenticated()
 
 //                .and()
@@ -60,7 +57,7 @@ public class AjaxSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
 
 
-        http.csrf().disable();
+//        http.csrf().disable();
 
         http
                 .exceptionHandling()

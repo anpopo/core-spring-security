@@ -1,7 +1,6 @@
 package io.security.corespringsecurity.security.config;
 
 import io.security.corespringsecurity.security.filter.AjaxLoginProcessingFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
