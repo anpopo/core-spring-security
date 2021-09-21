@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // 인증이 완료된 후 성공 시 핸들링 클래스
-@Component
+@Component(value = "customAuthenticationSuccessHandler")
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private RequestCache requestCache = new HttpSessionRequestCache();
