@@ -1,7 +1,7 @@
 package io.security.corespringsecurity.controller.user;
 
-import io.security.corespringsecurity.domain.User;
-import io.security.corespringsecurity.dto.UserDto;
+import io.security.corespringsecurity.domain.dto.UserDto;
+import io.security.corespringsecurity.domain.entity.User;
 import io.security.corespringsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

@@ -11,9 +11,9 @@ import java.util.Collection;
  */
 @Getter
 public class UserContext extends User {
-    private final io.security.corespringsecurity.domain.User user;
+    private final io.security.corespringsecurity.domain.entity.User user;
 
-    public UserContext(io.security.corespringsecurity.domain.User user, Collection<? extends GrantedAuthority> authorities) {
+    public UserContext(io.security.corespringsecurity.domain.entity.User user, Collection<? extends GrantedAuthority> authorities) {
         super(user.getUsername(), user.getPassword(), authorities);
         this.user = user;
     }

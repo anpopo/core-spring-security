@@ -1,6 +1,6 @@
 package io.security.corespringsecurity.security.service;
 
-import io.security.corespringsecurity.domain.User;
+import io.security.corespringsecurity.domain.entity.User;
 import io.security.corespringsecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,8 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
 
         return new UserContext(
                 user,
