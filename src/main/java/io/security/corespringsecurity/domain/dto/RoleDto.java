@@ -12,4 +12,8 @@ public class RoleDto {
     private String roleName;
     private String roleDesc;
 
+    @Override
+    public String toString() {
+        return "role: " + roleName + "/ roleDesc: " + roleDesc;
+    }
 }

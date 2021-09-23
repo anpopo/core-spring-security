@@ -38,11 +38,16 @@ public class ResourcesController {
     @PostMapping(value="/admin/resources")
     public String createResources(ResourcesDto resourcesDto) throws Exception {
 
-        ModelMapper modelMapper = new ModelMapper();
         Role role = roleRepository.findByRoleName(resourcesDto.getRoleName());
         Set<Role> roles = new HashSet<>();
         roles.add(role);
-        Resources resources = modelMapper.map(resourcesDto, Resources.class);
+
+        Resources resources = Resources.builder()
+                                .resourceName(resourcesDto.getResourceName())
+                                .httpMethod(resourcesDto.getHttpMethod())
+                                .orderNum(resourcesDto.getOrderNum())
+                                .resourceType(resourcesDto.getResourceType())
+                .build();
         resources.setRoleSet(roles);
 
         resourcesService.createResources(resources);

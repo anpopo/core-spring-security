@@ -3,16 +3,18 @@ package io.security.corespringsecurity.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
+@ToString(exclude = {"userRoles"})
 @NoArgsConstructor
 @Table(name = "users")
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

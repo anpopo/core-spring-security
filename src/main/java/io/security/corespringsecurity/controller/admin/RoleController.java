@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,7 +42,14 @@ public class RoleController {
     public String createRole(RoleDto roleDto) throws Exception {
 
         ModelMapper modelMapper = new ModelMapper();
-        Role role = modelMapper.map(roleDto, Role.class);
+
+        Role role = Role.builder()
+                        .roleName(roleDto.getRoleName())
+                        .roleDesc(roleDto.getRoleDesc())
+                        .resourcesSet(new LinkedHashSet())
+                        .users(new HashSet<>())
+                        .build();
+
         roleService.createRole(role);
 
         return "redirect:/admin/roles";

@@ -1,5 +1,6 @@
 package io.security.corespringsecurity.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,10 +29,12 @@ public class Role {
     @Column(name = "role_desc")
     private String roleDesc;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleSet")
     @OrderBy("ordernum desc")
     private Set<Resources> resourcesSet = new LinkedHashSet<>();
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userRoles")
     private Set<User> users = new HashSet<>();
 
@@ -40,4 +43,6 @@ public class Role {
         this.roleName = roleName;
         this.roleDesc = roleDesc;
     }
+
+
 }
